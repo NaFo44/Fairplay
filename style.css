@@ -228,7 +228,7 @@ section h2 {
     justify-content: space-between;
     text-align: left;
     gap: 50px;
-    padding: 70px 0;
+    padding: 100px 0;
     min-height: calc(100vh - 100px); /* Prend presque toute la hauteur visible */
 }
 
@@ -618,12 +618,33 @@ section h2 {
     .main-header {
         padding: 15px 20px;
     }
-    .main-nav ul {
-        gap: 20px;
+    /* Hide the regular nav on smaller screens */
+    .main-nav {
+        display: none;
     }
-    .main-nav a {
-        font-size: 16px;
+
+    /* Show hamburger menu */
+    .hamburger-menu {
+        display: block; /* Make sure it's visible */
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: var(--color-dark-gray);
+        cursor: pointer;
+        padding: 5px;
     }
+
+    .hamburger-menu:hover {
+        color: var(--color-accent);
+    }
+
+    /* Adjust header content for hamburger */
+    .header-content {
+        justify-content: space-between; /* Keep logo and hamburger apart */
+        align-items: center;
+        flex-direction: row; /* Ensure it stays a row */
+    }
+
     section {
         padding: 60px 0;
     }
@@ -668,29 +689,104 @@ section h2 {
     }
 }
 
-@media (max-width: 768px) {
-    .main-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    .header-content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Hidden by default, off-screen to the right */
+    width: 300px;
+    height: 100%;
+    background-color: var(--color-dark-gray);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    z-index: 1001; /* Higher than header */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sidebar.open {
+    right: 0; /* Slide in */
+}
+
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.sidebar ul li {
+    width: 100%;
+}
+
+.sidebar ul li a {
+    color: var(--color-white);
+    font-size: 20px;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: var(--color-accent-dark);
+    color: var(--color-white);
+}
+
+.sidebar .btn-donate {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 15px !important; /* Adjust padding for sidebar button */
+    font-size: 18px;
+    text-align: center;
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: var(--color-white);
+    cursor: pointer;
+    align-self: flex-end; /* Align to the top right */
+    padding: 10px;
+}
+
+.close-sidebar:hover {
+    color: var(--color-accent);
+}
+
+/* Overlay for when sidebar is open */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Just below sidebar */
+    display: none; /* Hidden by default */
+}
+
+.overlay.active {
+    display: block; /* Show when sidebar is open */
+}
+
+
+@media (min-width: 993px) {
+    /* Hide hamburger and sidebar on larger screens */
+    .hamburger-menu, .sidebar, .overlay {
+        display: none;
     }
     .main-nav {
-        width: 100%;
+        display: block; /* Show the regular nav */
     }
-    .main-nav ul {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    .main-nav a.btn-donate { /* Applique aussi sur le bouton de don */
-        margin-top: 10px;
-        align-self: flex-start;
-    }
+}
+
+
+@media (max-width: 768px) {
     .main-content {
         padding: 0 20px;
     }
@@ -777,6 +873,9 @@ section h2 {
     .development-links .btn-secondary {
         width: 100%;
         max-width: 300px;
+    }
+    .sidebar {
+        width: 250px; /* Smaller sidebar for very small screens */
     }
 }
 
