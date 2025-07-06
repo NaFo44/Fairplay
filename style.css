@@ -850,6 +850,11 @@ section h2 {
         flex-direction: column;
         gap: 10px;
     }
+
+    /* Hide hero image on mobile */
+    .hero-image {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
