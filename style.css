@@ -228,7 +228,7 @@ section h2 {
     justify-content: space-between;
     text-align: left;
     gap: 50px;
-    padding: 100px 0;
+    padding: 70px 0;
     min-height: calc(100vh - 100px); /* Prend presque toute la hauteur visible */
 }
 
