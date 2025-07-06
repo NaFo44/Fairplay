@@ -16,7 +16,32 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const closeSidebarBtn = document.querySelector('.close-sidebar');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const sidebarLinks = sidebar.querySelectorAll('a');
 
+    function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    hamburgerMenu.addEventListener('click', openSidebar);
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar); // Close sidebar when clicking overlay
+
+    // Close sidebar when a link inside it is clicked
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', closeSidebar);
+    });
     // Optional: Add a subtle animation to feature icons on hover
     const featureItems = document.querySelectorAll('.feature-item');
     featureItems.forEach(item => {
